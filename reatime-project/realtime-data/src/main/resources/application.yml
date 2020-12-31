@@ -1,0 +1,10 @@
+server:
+  port: 8081
+
+spring:
+  kafka:
+    bootstrap-servers: hadoop110:9092,hadoop111:9092,hadoop112:9092
+    # 指定消息key和消息体的编解码方式
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
