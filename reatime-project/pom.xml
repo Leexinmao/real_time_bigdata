@@ -13,6 +13,7 @@
         <module>realtime-hot-items</module>
         <module>realtime-generate-data</module>
         <module>realtime-data</module>
+        <module>realtime-flink-data</module>
     </modules>
 
 
