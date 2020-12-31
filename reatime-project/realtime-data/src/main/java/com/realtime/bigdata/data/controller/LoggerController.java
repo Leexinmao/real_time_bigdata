@@ -1,8 +1,6 @@
 package com.realtime.bigdata.data.controller;
 
 
-
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.realtime.bigdata.data.common.GmallConstant;

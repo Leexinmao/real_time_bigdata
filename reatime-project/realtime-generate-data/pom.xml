@@ -13,5 +13,14 @@
     <artifactId>realtime-generate-data</artifactId>
     <version>1.0.0</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.realtime.admin.common</groupId>
+            <artifactId>realtime-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+    </dependencies>
+
 
 </project>
