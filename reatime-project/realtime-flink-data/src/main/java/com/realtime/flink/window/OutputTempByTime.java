@@ -1,7 +1,8 @@
 package com.realtime.flink.window;
 
-import com.bigdata.flink.admin.model.SensorReading;
-import com.bigdata.flink.admin.source.SensouSoure;
+
+import com.realtime.flink.model.SensorReading;
+import com.realtime.flink.model.SensouSoure;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.TimeCharacteristic;

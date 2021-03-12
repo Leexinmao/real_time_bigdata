@@ -1,7 +1,8 @@
 package com.realtime.flink.flinktable;
 
-import com.bigdata.flink.admin.model.SensorReading;
-import com.bigdata.flink.admin.source.SensouSoure;
+
+import com.realtime.flink.model.SensorReading;
+import com.realtime.flink.source.SensouSoure;
 import org.apache.flink.streaming.api.CheckpointingMode;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.environment.ExecutionCheckpointingOptions;

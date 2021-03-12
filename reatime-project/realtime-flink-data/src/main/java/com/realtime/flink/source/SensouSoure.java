@@ -1,6 +1,7 @@
 package com.realtime.flink.source;
 
-import com.bigdata.flink.admin.model.SensorReading;
+
+import com.realtime.flink.model.SensorReading;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
 import java.util.Calendar;

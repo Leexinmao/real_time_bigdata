@@ -1,6 +1,7 @@
 package com.realtime.flink.hotitems;
 
-import com.bigdata.flink.userbehavior.model.UserBehavior;
+
+import com.realtime.flink.model.UserBehavior;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.java.tuple.Tuple2;

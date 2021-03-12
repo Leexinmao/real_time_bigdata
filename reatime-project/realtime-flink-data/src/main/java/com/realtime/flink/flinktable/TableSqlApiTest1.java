@@ -1,7 +1,8 @@
 package com.realtime.flink.flinktable;
 
 
-import com.bigdata.flink.admin.model.SensorReading;
+
+import com.realtime.flink.model.SensorReading;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.Table;

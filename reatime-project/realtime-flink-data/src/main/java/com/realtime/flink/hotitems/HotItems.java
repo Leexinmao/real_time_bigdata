@@ -12,6 +12,7 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
+import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.streaming.api.functions.KeyedProcessFunction;
 import org.apache.flink.streaming.api.functions.windowing.ProcessWindowFunction;
@@ -20,6 +21,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
 import org.apache.flink.util.Collector;
 
 import java.sql.Timestamp;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -41,18 +43,47 @@ public class HotItems {
 
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
 
-        DataStreamSource<String> stream = env.readTextFile("D:\\bigdata\\javaflink\\mavenproject\\src\\main\\resources\\UserBehavior.csv");
+        DataStreamSource<String> stream = env.readTextFile("D:\\bigdate\\gitproject\\real_time_bigdata\\reatime-project\\realtime-flink-data\\src\\main\\resources\\UserBehavior.csv");
+
+        DataStream<UserBehavior> map = stream.map(line -> {
+            String[] str = line.split(",");
+            // Long userId, Long itemId, Integer categoryId, String behavior, Long timestamp
+            return new UserBehavior(Long.parseLong(str[0]), Long.parseLong(str[1]), Integer.parseInt(str[2]), str[3], Long.parseLong(str[4]) * 1000L);
+        });
+        map.filter(r -> r.behavior.equals("pv"));
+
+//        DataStream<UserBehavior> withTimestampsAndWatermarks = map.assignTimestampsAndWatermarks(new MyAssignTimeStampsAndWaterMarks());
+
+//        SingleOutputStreamOperator<ItemViewCount> aggregate = withTimestampsAndWatermarks.keyBy(r -> r.itemId)
+//                .timeWindow(Time.minutes(60), Time.minutes(5))
+//                // AggCount 算出group by itemId的数量
+//                .aggregate(new AggCount(), new WindowResultFunction());
+//        aggregate.keyBy(r -> r.getWindowEnd())
+//                .process(new ItemTop(5))
+//                .print();
+
 
         DataStream<ItemViewCount> pv = stream.map(line -> {
             String[] str = line.split(",");
             // Long userId, Long itemId, Integer categoryId, String behavior, Long timestamp
+            System.out.println();
             return new UserBehavior(Long.parseLong(str[0]), Long.parseLong(str[1]), Integer.parseInt(str[2]), str[3], Long.parseLong(str[4]) * 1000L);
         })
                 .filter(r -> r.behavior.equals("pv"))
+
+//                .assignTimestampsAndWatermarks(WatermarkStrategy.<UserBehavior>forBoundedOutOfOrderness(Duration.ofSeconds(10))
+//                .withTimestampAssigner(new SerializableTimestampAssigner<UserBehavior>() {
+//                    @Override
+//                    public long extractTimestamp(UserBehavior userBehavior, long l) {
+//                        return l;
+//                    }
+//                }))
+
                 .assignTimestampsAndWatermarks(WatermarkStrategy.<UserBehavior>forMonotonousTimestamps()
                         .withTimestampAssigner(new SerializableTimestampAssigner<UserBehavior>() {
                             @Override
                             public long extractTimestamp(UserBehavior userBehavior, long l) {
+                                System.out.println();
                                 return userBehavior.timestamp;
                             }
                         }))
@@ -60,12 +91,12 @@ public class HotItems {
                 .timeWindow(Time.minutes(60), Time.minutes(5))
                 // AggCount 算出group by itemId的数量
                 .aggregate(new AggCount(), new WindowResultFunction());
+        /* TODO 以时间戳结束时间分流 可以是在相同时间范围的数据在同一条流输出 */
         pv.keyBy(r -> r.getWindowEnd())
                 .process(new ItemTop(5))
                 .print();
 
-
-        env.execute("HotItems");
+        env.execute("HotItemss");
 
 
     }

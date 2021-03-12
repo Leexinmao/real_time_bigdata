@@ -1,6 +1,7 @@
 package com.realtime.flink.window;
 
-import com.bigdata.flink.admin.source.KafkaSource;
+
+import com.realtime.flink.source.KafkaSource;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.TimeCharacteristic;

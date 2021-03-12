@@ -1,9 +1,10 @@
 package com.realtime.flink.flinktable;
 
-import com.bigdata.flink.admin.model.Order;
-import com.bigdata.flink.admin.source.OrderSource;
-import com.bigdata.flink.admin.util.DataUtils;
-import com.bigdata.flink.admin.util.WriteReadUtils;
+
+import com.realtime.flink.model.Order;
+import com.realtime.flink.source.OrderSource;
+import com.realtime.flink.utils.DataUtils;
+import com.realtime.flink.utils.WriteReadUtils;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.streaming.api.TimeCharacteristic;
@@ -77,7 +78,7 @@ public class OrderTableFlink {
             String name =  field2.toString();
             Integer age = Integer.parseInt(field3.toString());
             String rowTime = DataUtils.formatGM8(field4.toString());
-            Order order = new Order(nameId,name,age,rowTime);
+            Order order = new Order(nameId,name,age,Long.parseLong(rowTime));
             WriteReadUtils.writeToFileToIoWrite(order.toString());
             out.collect(order);
 

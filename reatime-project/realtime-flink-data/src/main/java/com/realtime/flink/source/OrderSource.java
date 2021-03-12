@@ -1,7 +1,8 @@
 package com.realtime.flink.source;
 
-import com.bigdata.flink.admin.model.Order;
-import com.bigdata.flink.admin.util.GeneratorName;
+
+import com.realtime.flink.model.Order;
+import com.realtime.flink.utils.GeneratorName;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 
 import java.util.Calendar;

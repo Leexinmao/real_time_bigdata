@@ -1,6 +1,6 @@
 package com.realtime.flink.window;
 
-import com.bigdata.flink.admin.source.KafkaSource;
+import com.realtime.flink.source.KafkaSource;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.state.ValueState;

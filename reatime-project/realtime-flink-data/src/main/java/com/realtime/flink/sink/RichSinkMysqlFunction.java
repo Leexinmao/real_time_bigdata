@@ -1,6 +1,7 @@
 package com.realtime.flink.sink;
 
-import com.bigdata.flink.admin.model.SensorReading;
+
+import com.realtime.flink.model.SensorReading;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.streaming.api.functions.sink.RichSinkFunction;
 

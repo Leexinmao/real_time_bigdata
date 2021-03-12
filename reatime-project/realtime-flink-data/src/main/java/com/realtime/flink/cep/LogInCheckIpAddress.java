@@ -1,7 +1,8 @@
 package com.realtime.flink.cep;
 
-import com.bigdata.flink.admin.model.UserBehaviorLogIn;
-import com.bigdata.flink.admin.source.UserBehaviorSource;
+
+import com.realtime.flink.model.UserBehaviorLogIn;
+import com.realtime.flink.model.UserBehaviorSource;
 import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.cep.CEP;
